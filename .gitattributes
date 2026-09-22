@@ -1,0 +1,25 @@
+# Normalize line endings: LF in the repo and in the working tree, on every platform.
+#
+# This machine has core.autocrlf=true (the Git for Windows default, set at system
+# level). Left alone, that rewrites every text file to CRLF on checkout, which shows
+# up as a whole-repo "modified" diff with no visible difference and pollutes review
+# and pipeline diffs. Declaring eol=lf here pins the current LF-everywhere state.
+* text=auto eol=lf
+
+# Windows-native scripts must stay CRLF — cmd.exe mis-parses LF-terminated .bat/.cmd.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary — never normalize or diff these.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
+*.zip  binary
+*.gz   binary
+*.woff  binary
+*.woff2 binary
+*.ttf  binary
