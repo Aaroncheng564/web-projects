@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+fastapi==0.109.2
+uvicorn[standard]==0.27.1
+python-multipart==0.0.9
+sqlalchemy==2.0.25
+alembic==1.13.1
+pydantic==2.6.1
+pydantic-settings==2.1.0
+python-dotenv==1.0.1
+httpx==0.26.0
+requests==2.31.0
+apscheduler==3.10.4
+pytest>=8.0
+pytest-asyncio>=0.24.0
+chromadb==0.4.22
+langchain-openai>=0.1.0
+pymysql>=1.1.0
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+dashscope==1.20.0
+python-docx==1.1.0
+playwright>=1.40
+
+# --- 兼容性钉版：实测必需，勿删 ---
+# 上面两处约束不加会让项目直接起不来，理由与实测记录如下。
+
+# chromadb 0.4.22 在 import 期求值 np.float_，该别名已在 NumPy 2.0 移除。
+# 实测 numpy 2.4.6 → AttributeError: `np.float_` was removed；numpy 1.26.4 正常。
+numpy<2
+
+# passlib 1.7.4 停更于 2020，其 bcrypt 后端初始化时会用一个超长口令做自检
+# （探测 bcrypt 的历史截断 bug）。bcrypt 5.0 把「静默截断」改成了抛异常，
+# 于是后端加载阶段即失败。实测 bcrypt 5.0.0 → ValueError: password cannot be
+# longer than 72 bytes；bcrypt 4.0.1 正常（hash + verify 均通过）。
+bcrypt==4.0.1
