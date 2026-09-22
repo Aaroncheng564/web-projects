@@ -1,0 +1,32 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Secrets & local env
+.env
+.env.*
+!.env.example
+
+# Claude Code local state
+.claude/settings.local.json
+.claude/worktrees/
+
+# graphify generated artifacts (regenerable via /graphify)
+graphify-out/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
